@@ -12,7 +12,7 @@
 	</div>
 
 	<p>Lives: <span id="lives-left"></span></p>
-	<p>Wrong Guesses: <span id="wrong-guesses"></span></p>
+	<p>Wrong Guesses: <span id="wrong-letters"></span></p>
 	<p>Wins: <span id="wins"></span></p>
 	<p>Losses: <span id="losses"></span></p>
 	<h3 id="word"></h3>
@@ -38,7 +38,7 @@ var wrongLetters = [];
 
 
 var wins = 0;
-var losses = 1;
+var losses = 0;
 var lives = 15;
 
 
@@ -73,20 +73,31 @@ document.onkeyup = function(event){
 		for (var i = 0; i < wordToGuess.length; i++){
 			if(userGuess === wordToGuess[i])
 				blanksAndGuesses[i] = userGuess;
+
 		}
 	}	else {
+
 		lives--;
+		wrongLetters.push(userGuess)
+		console.log(userGuess);
 	}
 
 document.getElementById('word').innerHTML =blanksAndGuesses.join(" ");
+document.getElementById('wrong-letters').innerHTML = wrongLetters.join(" ");
+document.getElementById('lives-left').innerHTML = lives;
+
+
+
 
 	
 	}
 	
 
-		// index of wordToGuess is the same as blankAndGuesses
-		//same logic of "you got it!" to find the index of Blanks&Guesses, and then Change the lines into letters,
-		//assign... 
+		// NEXT: how does it know a word is finished?
+		// NEXT: change the scores
+		// NEXT NEXT: give a new word when finished!
+		// NEXT NEXT NEXT: extra shit, make it look nice... 
+
 
 
 
