@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en us">
+<head>
+	<title>Hangman!</title>
+	<meta charset="UTF-8">
+	<script="text/javascript" src="assets/javascript/game.js"> </script>
+</head>
+<body>
+
+	<div id="game">
+		<p>It's Hangman! Guess a letter!</p>
+	</div>
+
+	<p>Lives: <span id="lives-left"></span></p>
+	<p>Wrong Guesses: <span id="wrong-guesses"></span></p>
+	<p>Wins: <span id="wins"></span></p>
+	<p>Losses: <span id="losses"></span></p>
+	<h3 id="word"></h3>
+
+
+<script type="text/javascript">
+
+var words = [
+ 	"radical",
+ 	"super",
+ 	"dude",
+ 	"awesome",
+ 	"totally",
+ 	"bro"
+]
+
+//all the variable I think I'll need
+var wordToGuess = "";
+var lettersInWordToGuess = [];
+var Blanks = 0;
+var blanksAndGuesses = [];
+var wrongLetters = [];
+
+
+var wins = 0;
+var losses = 1;
+var lives = 15;
+
+
+//picks a random word from the "words" array:
+wordToGuess = words[Math.floor(Math.random() * words.length)];
+//splits them into each word into separate letters?
+lettersInWordToGuess = wordToGuess.split("");
+//makes the blanks to show user how many letters
+Blanks = lettersInWordToGuess.length;
+console.log(wordToGuess);
+console.log(Blanks)
+
+//puts up blanks for the words
+for(var i = 0; i < Blanks; i++){
+    blanksAndGuesses.push("-");
+}
+
+
+console.log(blanksAndGuesses);
+
+//PRETTY SURE THIS DOESN'T WORK RIGHT NOW... 
+document.getElementById('word').innerHTML = blanksAndGuesses.join(" ");
+document.getElementById('lives-left').innerHTML = lives;
+
+//gets the user input... 
+document.onkeyup = function(event){
+
+	var userGuess = event.key; 
+
+	if(wordToGuess.indexOf(userGuess) > -1)
+	{
+		for (var i = 0; i < wordToGuess.length; i++){
+			if(userGuess === wordToGuess[i])
+				blanksAndGuesses[i] = userGuess;
+		}
+	}	else {
+		lives--;
+	}
+
+document.getElementById('word').innerHTML =blanksAndGuesses.join(" ");
+
+	
+	}
+	
+
+		// index of wordToGuess is the same as blankAndGuesses
+		//same logic of "you got it!" to find the index of Blanks&Guesses, and then Change the lines into letters,
+		//assign... 
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
