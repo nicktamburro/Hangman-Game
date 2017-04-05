@@ -8,7 +8,8 @@
 <body>
 
 	<div id="game">
-		<p>It's Hangman! Guess a letter!</p>
+		<h1>Let's Hang, Man!</h1>
+		<h2>Guess a letter!</h2>
 	</div>
 
 	<p>Lives: <span id="lives-left"></span></p>
@@ -42,6 +43,10 @@ var losses = 0;
 var lives = 15;
 
 
+	wrongLetters = [];
+	lives = 15;
+	blanksAndGuesses = [];
+
 //picks a random word from the "words" array:
 wordToGuess = words[Math.floor(Math.random() * words.length)];
 //splits them into each word into separate letters?
@@ -56,12 +61,12 @@ for(var i = 0; i < Blanks; i++){
     blanksAndGuesses.push("-");
 }
 
-
 console.log(blanksAndGuesses);
 
 //PRETTY SURE THIS DOESN'T WORK RIGHT NOW... 
 document.getElementById('word').innerHTML = blanksAndGuesses.join(" ");
 document.getElementById('lives-left').innerHTML = lives;
+
 
 //gets the user input... 
 document.onkeyup = function(event){
@@ -86,17 +91,43 @@ document.getElementById('word').innerHTML =blanksAndGuesses.join(" ");
 document.getElementById('wrong-letters').innerHTML = wrongLetters.join(" ");
 document.getElementById('lives-left').innerHTML = lives;
 
+if(lettersInWordToGuess.join(" ") === blanksAndGuesses.join(" ")){
+        wins++;
+        alert("You win!");
+        document.getElementById('wins').innerHTML = wins;
+
+
+        }
+  
+        
+    else if(lives === 0){
+    	losses++;
+        document.getElementById('losses').innerHTML  = losses;
+
+        document.getElementById('wrong-letters').innerHTML = "";
+        alert("You lose!");
+
+
+       
+    }
+
+
+
+
+
+
+}
 
 
 
 	
-	}
+	
 	
 
-		// NEXT: how does it know a word is finished?
-		// NEXT: change the scores
-		// NEXT NEXT: give a new word when finished!
-		// NEXT NEXT NEXT: extra shit, make it look nice... 
+		
+		// NEXT: when a word finishes give new word?
+		// NEXT NEXT NEXT: extra shit, make it look nice...
+		// NEXT: do something if you already guessed a letter? 
 
 
 
