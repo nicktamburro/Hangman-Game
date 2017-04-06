@@ -4,30 +4,36 @@
 	<title>Hangman!</title>
 	<meta charset="UTF-8">
 	<script="text/javascript" src="assets/javascript/game.js"> </script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 </head>
 <body>
-
-	<div id="game">
+	<div class="jumbotron text-center" id="game">
+		<div class="jumbotron-text">
 		<h1>Let's Hang, Man!</h1>
-		<h2>Guess a letter!</h2>
+		<h2>Guess a letter, my dude.</h2>
+		</div>
 	</div>
 
-	<p>Lives: <span id="lives-left"></span></p>
-	<p>Wrong Guesses: <span id="wrong-letters"></span></p>
-	<p>Wins: <span id="wins"></span></p>
-	<p>Losses: <span id="losses"></span></p>
-	<h3 id="word"></h3>
-
+<div class="panel panel-default">
+  <div class="panel-body text-center">
+  	<h2 id="word"></h2>
+	<h3>Guesses: <span id="lives-left"></span></h3>
+	<h3>Wrong Guesses: <span id="wrong-letters"></span></h3>
+	<h3>Mellow: <span id="wins"></span></h3>
+	<h3>Harsh: <span id="losses"></span></h3>
+	</div>
+</div>
 
 <script type="text/javascript">
-
 var words = [
  	"radical",
- 	"super",
+ 	"sick",
  	"dude",
  	"awesome",
  	"totally",
- 	"bro"
+ 	"bro",
 ]
 
 //all the variable I think I'll need
@@ -37,15 +43,19 @@ var Blanks = 0;
 var blanksAndGuesses = [];
 var wrongLetters = [];
 
-
+//function startGame(){
 var wins = 0;
 var losses = 0;
 var lives = 15;
 
-
+//THIS IS WHERE MICHAEL PUT IT TOO...
+//function startGame(){
 	wrongLetters = [];
 	lives = 15;
 	blanksAndGuesses = [];
+
+//tried to make this whole thing a function called 
+//startGame... function startGame(){
 
 //picks a random word from the "words" array:
 wordToGuess = words[Math.floor(Math.random() * words.length)];
@@ -53,34 +63,41 @@ wordToGuess = words[Math.floor(Math.random() * words.length)];
 lettersInWordToGuess = wordToGuess.split("");
 //makes the blanks to show user how many letters
 Blanks = lettersInWordToGuess.length;
-console.log(wordToGuess);
-console.log(Blanks)
 
 //puts up blanks for the words
 for(var i = 0; i < Blanks; i++){
     blanksAndGuesses.push("-");
+    console.log(wordToGuess);
 }
 
-console.log(blanksAndGuesses);
-
-//PRETTY SURE THIS DOESN'T WORK RIGHT NOW... 
+ 
 document.getElementById('word').innerHTML = blanksAndGuesses.join(" ");
 document.getElementById('lives-left').innerHTML = lives;
+document.getElementById('wins').innerHTML = wins;
+document.getElementById('losses').innerHTML = losses;
+
 
 
 //gets the user input... 
 document.onkeyup = function(event){
 
-	var userGuess = event.key; 
+	var userGuess = event.key //toLowerCase(); 
 
-	if(wordToGuess.indexOf(userGuess) > -1)
+for (var i = 0; i < wrongLetters.length; i++)
+	if(userGuess === wrongLetters[i])
+		alert("You already guessed that one, bro!");
+
+	if (userGuess < 65 || userGuess > 90)
+		alert("It needs to be a letter, bro!");
+
+	if (wordToGuess.indexOf(userGuess) > -1)
 	{
 		for (var i = 0; i < wordToGuess.length; i++){
 			if(userGuess === wordToGuess[i])
 				blanksAndGuesses[i] = userGuess;
-
 		}
-	}	else {
+	}
+	else {
 
 		lives--;
 		wrongLetters.push(userGuess)
@@ -91,10 +108,17 @@ document.getElementById('word').innerHTML =blanksAndGuesses.join(" ");
 document.getElementById('wrong-letters').innerHTML = wrongLetters.join(" ");
 document.getElementById('lives-left').innerHTML = lives;
 
+//}  
+//END of attempted startGame function!!
+
 if(lettersInWordToGuess.join(" ") === blanksAndGuesses.join(" ")){
-        wins++;
-        alert("You win!");
-        document.getElementById('wins').innerHTML = wins;
+       wins++;
+        alert("YEAH, BRO!");
+      document.getElementById('wins').innerHTML = wins;
+      var audio = new Audio('assets/sounds/Yeah.mp3');
+	audio.play();
+  //   startgame();
+
 
 
         }
@@ -105,35 +129,13 @@ if(lettersInWordToGuess.join(" ") === blanksAndGuesses.join(" ")){
         document.getElementById('losses').innerHTML  = losses;
 
         document.getElementById('wrong-letters').innerHTML = "";
-        alert("You lose!");
+        alert("AW, DUDE!");
+        var audio = new Audio('assets/sounds/gnarly.mp3');
+		audio.play();
+   // startgame();
 
-
-       
     }
-
-
-
-
-
-
-}
-
-
-
-	
-	
-	
-
-		
-		// NEXT: when a word finishes give new word?
-		// NEXT NEXT NEXT: extra shit, make it look nice...
-		// NEXT: do something if you already guessed a letter? 
-
-
-
-
-
-
+}	
 
 
 
