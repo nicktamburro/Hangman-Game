@@ -15,15 +15,15 @@
 		</div>
 	</div>
 
-<div class="panel panel-default">
-  <div class="panel-body text-center">
-  	<h2 id="word"></h2>
-	<h3>Guesses: <span id="lives-left"></span></h3>
-	<h3>Wrong Guesses: <span id="wrong-letters"></span></h3>
-	<h3>Mellow: <span id="wins"></span></h3>
-	<h3>Harsh: <span id="losses"></span></h3>
+	<div class="panel panel-default">
+  		<div class="panel-body text-center">
+  			<h2 id="word"></h2>
+			<h3>Guesses: <span id="lives-left"></span></h3>
+			<h3>Wrong Guesses: <span id="wrong-letters"></span></h3>
+			<h3>Mellow: <span id="wins"></span></h3>
+			<h3>Harsh: <span id="losses"></span></h3>
+		</div>
 	</div>
-</div>
 
 <script type="text/javascript">
 var words = [
@@ -82,7 +82,7 @@ document.onkeyup = function(event){
 
 	var userGuess = event.key //toLowerCase(); 
 
-for (var i = 0; i < wrongLetters.length; i++)
+	for (var i = 0; i < wrongLetters.length; i++)
 	if(userGuess === wrongLetters[i])
 		alert("You already guessed that one, bro!");
 
@@ -103,19 +103,19 @@ for (var i = 0; i < wrongLetters.length; i++)
 		console.log(userGuess);
 	}
 
-document.getElementById('word').innerHTML =blanksAndGuesses.join(" ");
-document.getElementById('wrong-letters').innerHTML = wrongLetters.join(" ");
-document.getElementById('lives-left').innerHTML = lives;
+	document.getElementById('word').innerHTML =blanksAndGuesses.join(" ");
+	document.getElementById('wrong-letters').innerHTML = wrongLetters.join(" ");
+	document.getElementById('lives-left').innerHTML = lives;
 
 //}  
 //END of attempted startGame function!!
 
-if(lettersInWordToGuess.join(" ") === blanksAndGuesses.join(" ")){
+	if(lettersInWordToGuess.join(" ") === blanksAndGuesses.join(" ")){
        wins++;
         alert("YEAH, BRO!");
       document.getElementById('wins').innerHTML = wins;
       var audio = new Audio('assets/sounds/Yeah.mp3');
-	audio.play();
+		audio.play();
   //   startgame();
 
 
@@ -135,11 +135,6 @@ if(lettersInWordToGuess.join(" ") === blanksAndGuesses.join(" ")){
 
     }
 }	
-
-
-
-
-
 </script>
 </body>
 </html>
